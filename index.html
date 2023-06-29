@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Table from Text File</title>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('data.txt') // Assuming the data.txt file is in the same directory as your HTML file
+        .then(response => response.text())
+        .then(data => {
+          const rows = data.split('\n');
+          const table = document.getElementById('myTable');
+
+          rows.forEach(rowData => {
+            const columns = rowData.split(',');
+
+            const row = document.createElement('tr');
+            columns.forEach(columnData => {
+              const column = document.createElement('td');
+              column.textContent = columnData;
+              row.appendChild(column);
+            });
+
+            table.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  </script>
+</head>
+<body>
+  <table id="myTable">
+    <!-- Table rows will be dynamically added here -->
+  </table>
+</body>
+</html>
